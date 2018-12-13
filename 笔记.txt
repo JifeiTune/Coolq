@@ -1,0 +1,50 @@
+不要太频繁，会被冻
+发的消息不要都一个样，不然可能显示已发送实际上没有（这时已经被腾讯盯上了）
+
+http://127.0.0.1:5700/
+
+1.发送群消息
+/send_group_msg 
+参数
+group_id 群号
+message 要发送的内容
+auto_escape	消息内容是否作为纯文本发送（即不解析 CQ 码），只在 message 字段是字符串时有效
+
+2.获取群信息
+/_get_group_info
+参数
+group_id 群号
+
+3.获取群成员列表
+/get_group_member_list
+参数
+group_id 群号
+
+
+Linux搭建
+
+酷q：
+镜像目录
+/var/lib/docker/containers/df80080f2921146def8d52b266816754956b9f8bd8f94948f279936e65ac4e11
+访问端口10086
+上报端口4080
+安装docker
+apt-get install -y docker.io
+启动
+systemctl start docker
+停止
+systemctl stop docker
+安装酷q镜像
+docker pull coolq/wine-coolq
+创建并开启一个服务
+docker run --name=服务名 -d  -v 数据存放目录:/home/user/coolq -e VNC_PASSWD=远程登录密码 -e COOLQ_ACCOUNT=QQ账号 --network=host coolq/wine-coolq
+
+开启停止服务
+docker start coolq
+docker stop coolq
+
+浏览器访问：
+47.106.69.127:10080
+
+查看端口映射（最好别搞端口映射）
+docker port coolq
